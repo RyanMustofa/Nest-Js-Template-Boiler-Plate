@@ -29,6 +29,14 @@
 ## Installation
 
 ```bash
+$ git clone git@github.com:RyanMustofa/Nest-Js-Template-Boiler-Plate.git my-app
+$ yarn install
+```
+
+or
+
+```bash
+$ git clone https://github.com/RyanMustofa/Nest-Js-Template-Boiler-Plate.git my-app
 $ yarn install
 ```
 
