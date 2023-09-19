@@ -6,6 +6,8 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
 import { WebModule } from './app/web/web.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import helmet from 'helmet';
+import * as cors from 'cors';
 
 @Module({
   imports: [ConfigModule.forRoot(), DatabaseModule, ApiModule, WebModule],
@@ -14,6 +16,6 @@ import { ConfigModule } from '@nestjs/config';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('*');
+    consumer.apply(LoggerMiddleware, cors(), helmet()).forRoutes('*');
   }
 }
