@@ -8,6 +8,7 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import helmet from 'helmet';
 import * as cors from 'cors';
+import { ClientsModule } from '@nestjs/microservices';
 
 @Module({
   imports: [ConfigModule.forRoot(), DatabaseModule, ApiModule, WebModule],

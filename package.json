@@ -20,14 +20,17 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.9.3",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^3.0.1",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/microservices": "^10.2.5",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^10.0.0",
     "@types/hbs": "^4.0.1",
     "color": "^4.2.3",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "hbs": "^4.2.0",
     "helmet": "^7.0.0",
     "moment": "^2.29.4",
