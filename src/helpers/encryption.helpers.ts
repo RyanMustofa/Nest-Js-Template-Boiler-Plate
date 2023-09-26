@@ -13,7 +13,7 @@ interface DecryptInterface {
 }
 
 interface EncryptInterface {
-  encrypted: string;
+  encrypted: string | any;
   error: string | null;
 }
 
@@ -28,22 +28,15 @@ async function Encrypt(text: string): Promise<EncryptInterface> {
   const iv = randomBytes(16);
   const cipher = createCipheriv('aes-256-ctr', key, iv);
   const result = Buffer.concat([iv, cipher.update(text), cipher.final()]);
-  const split = result.join('%*@%');
+  let res = Buffer.from(result).toString('base64');
   return {
-    encrypted: split,
+    encrypted: res,
     error: null,
   };
 }
 
 async function Decrypt(data: string | any): Promise<DecryptInterface> {
-  if (!data.includes('%*@%')) {
-    return {
-      decrypted: '',
-      error: 'encrypted data not valid',
-    };
-  }
-  data = data.split('%*@%');
-  data = Buffer.from(data, 'binary');
+  data = Buffer.from(data, 'base64');
   const iv = data.slice(0, 16);
   data = data.slice(16);
 
