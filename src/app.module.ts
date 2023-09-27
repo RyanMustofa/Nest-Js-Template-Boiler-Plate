@@ -8,15 +8,24 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import helmet from 'helmet';
 import * as cors from 'cors';
-import { ClientsModule } from '@nestjs/microservices';
+import { AuthModule } from './auth/auth.module';
+import { FlashMiddleware } from './middleware/flash.middleware';
 
 @Module({
-  imports: [ConfigModule.forRoot(), DatabaseModule, ApiModule, WebModule],
+  imports: [
+    ConfigModule.forRoot(),
+    DatabaseModule,
+    ApiModule,
+    WebModule,
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware, cors(), helmet()).forRoutes('*');
+    consumer
+      .apply(LoggerMiddleware, FlashMiddleware, cors(), helmet())
+      .forRoutes('*');
   }
 }

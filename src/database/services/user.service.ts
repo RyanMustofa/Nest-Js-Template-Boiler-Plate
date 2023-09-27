@@ -15,4 +15,18 @@ export class UserService {
   async getData(): Promise<any> {
     return await this.userRepository.find();
   }
+
+  async getUserByUsername(username: string): Promise<User> {
+    return await this.userRepository.findOne({
+      where: {
+        username,
+      },
+    });
+  }
+
+  async insertUser(data: any): Promise<any> {
+    return await this.userRepository.insert({
+      ...data,
+    });
+  }
 }

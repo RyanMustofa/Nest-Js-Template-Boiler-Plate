@@ -8,8 +8,11 @@ export class User {
   @Column({ type: 'varchar' })
   username: string;
 
+  @Column({ type: 'varchar', nullable: true })
+  name?: string;
+
   @Column({ type: 'varchar' })
-  name: string;
+  password: string;
 
   @Column({ default: false })
   isActive: boolean;
