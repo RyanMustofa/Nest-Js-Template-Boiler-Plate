@@ -1,5 +1,5 @@
 export function getPagination(page: number, total: number, limit: number) {
-  return range(page, total < limit ? 1 : total / limit);
+  return range(page, Math.floor(total < limit ? 1 : total / limit));
 }
 
 function getLastDigit(t) {
