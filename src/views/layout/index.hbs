@@ -50,7 +50,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
     {{> style}}
 
-    <title>Analytics Dashboard - Yoda Admin Html Template</title>
+    <title> Analytics Dashboard - Yoda Admin Html Template</title>
 </head>
 
 <body>
@@ -125,6 +125,7 @@
         </div>
       </div>
 
+      {{!-- sidebar desktop --}}
       <ul>
         <li>
           <div class='menu-title'>
@@ -340,7 +341,7 @@
               </ul>
             </li>
           </ul>
-        </li>
+        {{!-- </li>
 
         <li>
           <div class='menu-title'>
@@ -1228,7 +1229,7 @@
               </ul>
             </li>
           </ul>
-        </li>
+        </li> --}}
       </ul>
     </div>
 
@@ -2442,6 +2443,7 @@
                                 </div>
                             </div>
 
+                            {{!-- sidebar mobile --}}
                             <ul>
                                 <li>
                                     <div class="menu-title">MAIN</div>
@@ -2613,7 +2615,7 @@
                                     </ul>
                                 </li>
 
-                                <li>
+                                {{!-- <li>
                                     <div class="menu-title">APPS</div>
 
                                     <ul>
@@ -3266,7 +3268,7 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
 
@@ -3359,6 +3361,16 @@
 
     <!-- Custom -->
     <script src="/assets/js/main.js"></script>
+    <script>
+      $(document).ready(function(){
+        let currentUrl = "{{currentUrl}}"
+        console.log(currentUrl)
+        if(currentUrl.includes("backoffice")){
+          window.localStorage.setItem("currentUrl",decodeURIComponent(currentUrl))
+          console.log(currentUrl)
+        }
+      })
+    </script>
 </body>
 
 </html>

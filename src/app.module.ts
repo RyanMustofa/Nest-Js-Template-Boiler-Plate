@@ -10,6 +10,7 @@ import helmet from 'helmet';
 import * as cors from 'cors';
 import { AuthModule } from './auth/auth.module';
 import { FlashMiddleware } from './middleware/flash.middleware';
+import { JobModule } from './job/job.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { FlashMiddleware } from './middleware/flash.middleware';
     ApiModule,
     WebModule,
     AuthModule,
+    JobModule,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -25,7 +27,29 @@ import { FlashMiddleware } from './middleware/flash.middleware';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(LoggerMiddleware, FlashMiddleware, cors(), helmet())
+      .apply(
+        LoggerMiddleware,
+        FlashMiddleware,
+        cors(),
+        helmet({
+          crossOriginEmbedderPolicy: false,
+          contentSecurityPolicy: {
+            directives: {
+              imgSrc: [
+                `'self'`,
+                'data:',
+                'apollo-server-landing-page.cdn.apollographql.com',
+              ],
+              scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
+              manifestSrc: [
+                `'self'`,
+                'apollo-server-landing-page.cdn.apollographql.com',
+              ],
+              frameSrc: [`'self'`, 'sandbox.embed.apollographql.com'],
+            },
+          },
+        }),
+      )
       .forRoutes('*');
   }
 }

@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Query,
   Render,
   Req,
   Res,
@@ -22,9 +23,14 @@ export class AuthController {
 
   @Get()
   @Render('auth/login.hbs')
-  async Login() {
+  async Login(
+    @Query('status') status: string = 'false',
+    @Query('logout') logout: string = 'false',
+  ) {
     return {
       title: 'Auth',
+      status: status === 'true',
+      logout: logout === 'true',
     };
   }
 
@@ -32,7 +38,7 @@ export class AuthController {
   @UseGuards(LoginGuard)
   @UseFilters(AuthFilter)
   async Signin(@Res() res: Response) {
-    res.redirect('/backoffice/dashboard');
+    res.redirect('/backoffice/auth?status=true');
   }
 
   @Post('/signup')
@@ -62,6 +68,6 @@ export class AuthController {
     req.logout({}, (err) => {
       console.error(err);
     });
-    return res.redirect('/backoffice/auth');
+    return res.redirect('/backoffice/auth?logout=true');
   }
 }

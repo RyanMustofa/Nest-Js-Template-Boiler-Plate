@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity/user.entity';
 import { UserService } from './services/user.service';
 import { ConfigModule } from '@nestjs/config';
+import { Menu } from './entity/menu.entity';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { ConfigModule } from '@nestjs/config';
       entities: ['dist/*/*/*.entity.js'],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, Menu]),
   ],
   controllers: [],
   providers: [UserService],

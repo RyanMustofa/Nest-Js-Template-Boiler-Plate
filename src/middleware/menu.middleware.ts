@@ -6,8 +6,10 @@ export class MenuMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     res.locals = {
       ...res.locals,
-      menu: 'testing',
+      menus_data: 'testing',
+      currentUrl: req.originalUrl,
     };
+    console.log(req.originalUrl);
     return next();
   }
 }

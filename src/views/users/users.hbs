@@ -1,0 +1,322 @@
+{{#> index }}
+{{#*inline "style"}}
+{{/inline}}
+{{#*inline "content"}}
+<div class='row mb-32 gy-32'>
+  <div class='col-12'>
+    <div class='row justify-content-between gy-32'>
+      <div class='col hp-flex-none w-auto'>
+        <nav aria-label='breadcrumb'>
+          <ol class='breadcrumb'>
+            <li class='breadcrumb-item'>
+              <a href='index.html'>
+                Home
+              </a>
+            </li>
+
+            <li class='breadcrumb-item'>
+              <a href='javascript:;'>
+                Applications
+              </a>
+            </li>
+
+            <li class='breadcrumb-item active'>
+              Contact
+            </li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class='col-12 col-md-7'>
+        <div class='row g-16 align-items-center justify-content-end'>
+          <div class='col-12 col-md-6 col-xl-4'>
+            <div class='input-group align-items-center'>
+              <span
+                class='input-group-text bg-white hp-bg-dark-100 border-end-0 pe-0'
+              >
+                <i
+                  class='iconly-Curved-User text-black-80'
+                  style='font-size: 16px;'
+                ></i>
+              </span>
+              <input
+                type='text'
+                class='form-control border-start-0 ps-8'
+                placeholder='Search'
+              />
+            </div>
+          </div>
+
+          <div class='col hp-flex-none w-auto'>
+            <button
+              type='button'
+              class='btn btn-primary w-100'
+              data-bs-toggle='modal'
+              data-bs-target='#addNewUser'
+            >
+              <i class='ri-user-add-line remix-icon'></i>
+              <span>
+                Add New User
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-12'>
+    <div class='card hp-contact-card mb-32'>
+      <div class='card-body px-0'>
+        <div class='table-responsive'>
+          <table class='table align-middle table-hover table-borderless'>
+            <thead>
+              <tr>
+                <th>
+                  Name
+                </th>
+                <th>
+                  Username
+                </th>
+                <th>
+                  Status
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {{#each data as |item|}}
+
+              <tr>
+                <td>
+                  {{item.name}}
+                </td>
+                <td>
+                  {{item.username}}
+                </td>
+                
+                <td>
+                  <div
+                    class='badge bg-{{#compare item.isActive true 'success' 'danger'}}{{/compare}}-4 hp-bg-dark-{{#compare item.isActive true 'success' 'danger'}}{{/compare}} text-{{#compare item.isActive true 'success' 'danger'}}{{/compare}} border-{{#compare item.isActive true 'success' 'danger'}}{{/compare}}'
+                  >
+                    {{#compare item.isActive true 'online' 'offline'}}{{/compare}}
+                  </div>
+                </td>
+                
+                <td class='text-end'>
+                  <i
+                    class='iconly-Light-Delete hp-cursor-pointer hp-transition hp-hover-text-color-danger-1 text-black-80'
+                    style='font-size: 24px;'
+                  ></i>
+                </td>
+              </tr>
+              {{/each}}
+
+              
+            </tbody>
+          </table>
+        </div>
+
+        <nav>
+          <ul class='pagination justify-content-end px-32'>
+            <li class='page-item'>
+              <a class='page-link' href='javascript:;'>
+                <svg
+                  viewBox='64 64 896 896'
+                  focusable='false'
+                  data-icon='left'
+                  width='12px'
+                  height='12px'
+                  fill='currentColor'
+                  aria-hidden='true'
+                >
+                  <path
+                    d='M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z'
+                  ></path>
+                </svg>
+              </a>
+            </li>
+
+
+            {{#each pages as |item|}}
+              <li class='page-item {{#compare ../page item 'active' ''}}{{/compare}}'>
+                <a class='page-link' href='/backoffice/user?page={{item}}&limit={{../limit}}'>
+                  {{item}}
+                </a>
+              </li>
+            {{/each}}
+
+            <li class='page-item'>
+              <a class='page-link' href='javascript:;'>
+                <svg
+                  viewBox='64 64 896 896'
+                  focusable='false'
+                  data-icon='right'
+                  width='12px'
+                  height='12px'
+                  fill='currentColor'
+                  aria-hidden='true'
+                >
+                  <path
+                    d='M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z'
+                  ></path>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class='modal fade'
+  id='addNewUser'
+  tabindex='-1'
+  aria-labelledby='addNewUserLabel'
+  aria-hidden='true'
+>
+  <div class='modal-dialog modal-dialog-centered'>
+    <div class='modal-content'>
+      <div class='modal-header py-16 px-24'>
+        <h5 class='modal-title' id='addNewUserLabel'>
+          Add Contact
+        </h5>
+        <button
+          type='button'
+          class='btn-close hp-bg-none d-flex align-items-center justify-content-center'
+          data-bs-dismiss='modal'
+          aria-label='Close'
+        >
+          <i
+            class='ri-close-line hp-text-color-dark-0 lh-1'
+            style='font-size: 24px;'
+          ></i>
+        </button>
+      </div>
+
+      <div class='divider m-0'></div>
+
+      <form>
+        <div class='modal-body'>
+          <div class='row gx-8'>
+            <div class='col-12 col-md-6'>
+              <div class='mb-24'>
+                <label for='name' class='form-label'>
+                  <span class='text-danger me-4'>
+                    *
+                  </span>
+                  Name
+                </label>
+                <input type='text' class='form-control' id='name' />
+              </div>
+            </div>
+
+            <div class='col-12 col-md-6'>
+              <div class='mb-24'>
+                <label for='userName' class='form-label'>
+                  <span class='text-danger me-4'>
+                    *
+                  </span>
+                  User Name
+                </label>
+                <input type='email' class='form-control' id='userName' />
+              </div>
+            </div>
+
+            <div class='col-12 col-md-6'>
+              <div class='mb-24'>
+                <label for='email' class='form-label'>
+                  <span class='text-danger me-4'>
+                    *
+                  </span>
+                  Email
+                </label>
+                <input type='email' class='form-control' id='email' />
+              </div>
+            </div>
+
+            <div class='col-12 col-md-6'>
+              <div class='mb-24'>
+                <label for='phone' class='form-label'>
+                  <span class='text-danger me-4'>
+                    *
+                  </span>
+                  Phone
+                </label>
+                <input type='text' class='form-control' id='phone' />
+              </div>
+            </div>
+
+            <div class='col-12 col-md-6'>
+              <div class='mb-24'>
+                <label for='role' class='form-label'>
+                  <span class='text-danger me-4'>
+                    *
+                  </span>
+                  Role
+                </label>
+                <input type='text' class='form-control' id='role' />
+              </div>
+            </div>
+
+            <div class='col-12 col-md-6'>
+              <div class='mb-24'>
+                <label for='status' class='form-label'>
+                  <span class='text-danger me-4'>
+                    *
+                  </span>
+                  Status
+                </label>
+                <select class='form-select' id='status'>
+                  <option selected hidden>
+                    Status
+                  </option>
+                  <option value='1'>
+                    Active
+                  </option>
+                  <option value='2'>
+                    Inactive
+                  </option>
+                  <option value='3'>
+                    Pending
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class='col-12'>
+              <div class='mb-24'>
+                <label for='personelText' class='form-label'>
+                  Personel Information Text
+                </label>
+                <textarea id='personelText' class='form-control'></textarea>
+              </div>
+            </div>
+
+            <div class='col-12'>
+              <div class='mb-24'>
+                <label for='aboutText' class='form-label'>
+                  About Text
+                </label>
+                <textarea id='aboutText' class='form-control'></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class='modal-footer pt-0 px-24 pb-24'>
+          <div class='divider'></div>
+
+          <button type='button' class='m-0 btn btn-primary w-100'>
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{/inline}}
+{{/index}}

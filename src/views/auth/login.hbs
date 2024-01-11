@@ -57,6 +57,21 @@
 </head>
 
 <body>
+  {{#if status}}
+  <script>
+    if(window.localStorage.getItem("currentUrl")){
+      location.href = window.localStorage.getItem("currentUrl")
+    }else{
+      location.href = "/backoffice/dashboard"
+
+    }
+  </script>
+  {{else if logout}}
+  <script>
+    window.localStorage.clear()
+    location.href = "/backoffice/auth"
+  </script> 
+  {{else}}
   <div class="row hp-authentication-page">
     <div id="contentLeft" class="col-12 col-lg-6 bg-primary-4 hp-bg-color-dark-90 position-relative">
       <div class="row hp-image-row h-100 px-8 px-sm-16 px-md-0 pb-32 pb-sm-0 pt-32 pt-md-0">
@@ -141,6 +156,8 @@
 
   <!-- Custom -->
   <script src="/assets/js/main.js"></script>
+  {{/if}}
+  
 </body>
 
 </html>
