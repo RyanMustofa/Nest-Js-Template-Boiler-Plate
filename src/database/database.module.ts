@@ -4,6 +4,7 @@ import { User } from './entity/user.entity';
 import { UserService } from './services/user.service';
 import { ConfigModule } from '@nestjs/config';
 import { Menu } from './entity/menu.entity';
+import { MenuService } from './services/menu.service';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { Menu } from './entity/menu.entity';
     TypeOrmModule.forFeature([User, Menu]),
   ],
   controllers: [],
-  providers: [UserService],
-  exports: [TypeOrmModule, UserService],
+  providers: [UserService, MenuService],
+  exports: [TypeOrmModule, UserService, MenuService],
 })
 export class DatabaseModule {}

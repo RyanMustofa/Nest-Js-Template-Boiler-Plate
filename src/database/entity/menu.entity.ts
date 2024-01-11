@@ -14,6 +14,15 @@ export class Menu {
   @Column({ type: 'varchar', nullable: false, default: false })
   code: string;
 
+  @Column({ type: 'integer', nullable: true })
+  parentId?: number;
+
+  @Column({ type: 'varchar', nullable: false, default: '/' })
+  path: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  icon: string;
+
   @Column({ type: 'timestamp', nullable: true })
   createdAt: Date;
 
