@@ -7,6 +7,6 @@ export class JobProcessor {
 
   @Process('data')
   async handleDataJob(job: Job) {
-    console.log(job.data);
+    console.log(job);
   }
 }
